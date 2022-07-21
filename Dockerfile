@@ -1,8 +1,8 @@
-FROM mcr.microsoft.com/dotnet/sdk:6.0-alpine AS base
+FROM mcr.microsoft.com/dotnet/sdk:5.0-alpine AS base
 WORKDIR /app
 EXPOSE 5000
 ENV RABBITMQ_HOST localhost
-ENV RABBITMQ_PORT 32001 
+ENV RABBITMQ_PORT 5672 
 ENV ASPNETCORE_URLS=http://+:5000
  
 # Creates a non-root user with an explicit UID and adds permission to access the /app folder
@@ -10,7 +10,7 @@ ENV ASPNETCORE_URLS=http://+:5000
 RUN adduser -u 5678 --disabled-password --gecos "" appuser && chown -R appuser /app
 USER appuser
  
-FROM mcr.microsoft.com/dotnet/sdk:6.0-alpine AS build
+FROM mcr.microsoft.com/dotnet/sdk:5.0-alpine AS build
 WORKDIR /src
 COPY ["TaskService.csproj", "./"]
 RUN dotnet restore "TaskService.csproj"

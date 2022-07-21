@@ -12,7 +12,7 @@ spec:
         app: taskmanagementservice
     spec:
       containers:
-        - name: rabbitmqproducer
+        - name: taskmanagementservice
           image: jonathan12352/msassessmenttaskmanagementservice:1.0.0
           env:
             - name: RABBITMQ_HOST
